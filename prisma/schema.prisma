@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  userName String
+  password String
+  orders Order[]
+
+  @@map("Users")
+}
+
+model Film {
+  id Int @id @default(autoincrement())
+  name String
+  image Bytes
+  mainActors String
+  content String
+  currentShowing CurrentShowing?
+  comingSoon ComingSoon?
+  movieSchedules MovieSchedule[]
+  @@map("Films")
+}
+
+model CurrentShowing{
+  id Int @id @default(autoincrement())
+  filmId Int @unique
+  film Film @relation(fields: [filmId], references: [id])
+  @@map("CurrentShowing")
+}
+
+model ComingSoon {
+  id Int @id @default(autoincrement())
+  filmId Int @unique
+  film Film @relation(fields: [filmId], references: [id])
+  @@map("ComingSoon")
+}
+
+model MovieSchedule {
+  id Int @id @default(autoincrement())
+  filmId Int @unique
+  time DateTime
+  location Int
+  film Film @relation(fields: [filmId] ,references: [id])
+
+  seatingOrderDetail SeatingOrderDetail?
+
+  @@map("MovieSchedule")  
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+  customerId Int @unique
+  date DateTime
+  totalPrice String
+  customer User @relation(fields: [customerId] ,references: [id])
+  @@map("Orders")
+}
+
+model Food {
+  id Int @id @default(autoincrement())
+  name String
+  price String
+  image Bytes
+  foodCombos FoodCombo[]
+  orderDetails OrderDetail[]
+  @@map("Food")
+}
+
+model Combo {
+  id Int @id @default(autoincrement())
+  price String
+  name String
+  foodCombos FoodCombo[]
+  orderDetails OrderDetail[]
+  @@map("Combo")
+}
+
+
+model FoodCombo {
+  id Int @id @default(autoincrement())
+  foodId  Int 
+  comboId Int
+  food    Food  @relation(fields: [foodId], references: [id])
+  combo   Combo @relation(fields: [comboId], references: [id])
+  @@map("FoodCombo")
+}
+
+model OrderDetail {
+  id Int @id @default(autoincrement())
+  orderId Int
+  foodId Int? 
+  comboId  Int?
+  seatValue String?
+
+  food Food? @relation(fields: [foodId], references: [id])
+  combo Combo? @relation(fields: [comboId] ,references: [id])
+  seatingOrderDeatil SeatingOrderDetail?
+  @@map("OrderDetails")
+}
+
+model SeatingOrderDetail{
+  id Int @id @default(autoincrement())
+  orderDetailId Int @unique
+  value String
+  movieScheduleId Int @unique
+
+  orderDetail OrderDetail @relation(fields: [orderDetailId], references: [id])
+  movieSchedule MovieSchedule @relation(fields: [movieScheduleId], references: [id])
+  @@map("SeatingOrderDetails") 
+}
