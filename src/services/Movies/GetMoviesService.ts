@@ -1,5 +1,6 @@
 import GetMovieRepository from "../../repository/Movies/GetMovieRepository";
-
+import dotenv from 'dotenv';
+dotenv.config()
 const getTop10FilmCurrentShowing = async () => {
     try {
         const movies = await GetMovieRepository.getTop10FilmCurrentShowing();
@@ -29,8 +30,18 @@ const searchMovie = async (searchTerm: string) => {
     }
 }
 
+const getMovieById = async (id: number) => {
+    const movie = await GetMovieRepository.getMovieById(id);
+    const response = {
+        ...movie,
+        image: `${process.env.BASE_URL}/getImageFromFilmId/${movie?.id}`
+    }
+    return response
+}
+
 export default {
     getTop10FilmCurrentShowing,
     getTop10FilmComingSoon,
-    searchMovie
+    searchMovie,
+    getMovieById
 }

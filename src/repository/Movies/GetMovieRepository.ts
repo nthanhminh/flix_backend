@@ -76,8 +76,19 @@ const searchMovie = async(searchTerm: string) => {
     }
 }
 
+const getMovieById = async(id: number) => {
+    const movie = await prisma.film.findFirst({
+        where: {
+            id
+        }
+    })
+
+    return movie
+}
+
 export default {
     getTop10FilmCurrentShowing,
     getTop10FilmComingSoon,
-    searchMovie
+    searchMovie,
+    getMovieById
 }

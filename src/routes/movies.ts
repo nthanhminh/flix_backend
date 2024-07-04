@@ -22,4 +22,6 @@ movieRouter.get('/getTop10FilmComingSoon', GetMovieController.getTop10FilmComing
 
 movieRouter.get('/searchMovie', GetMovieController.searchMovie)
 
+movieRouter.get('/getMovieById/:id', GetMovieController.getMovieById)
+
 export default movieRouter

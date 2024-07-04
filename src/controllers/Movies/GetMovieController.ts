@@ -32,8 +32,19 @@ const searchMovie = async(req: Request, res: Response) => {
     }
 }
 
+const getMovieById = async(req: Request, res: Response) => {
+    const id = parseInt(req.params.id)
+    if (isNaN(id)) {
+        res.status(400).send('Invalid ID format');
+        return;
+    }
+    const movie = await GetMoviesService.getMovieById(id)
+    res.status(200).send(movie)
+}
+
 export default {
     getTop10FilmCurrentShowing,
     getTop10FilmComingSoon,
-    searchMovie
+    searchMovie,
+    getMovieById
 }
