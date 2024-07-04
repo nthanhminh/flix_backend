@@ -34,7 +34,7 @@ const getMovieById = async (id: number) => {
     const movie = await GetMovieRepository.getMovieById(id);
     const response = {
         ...movie,
-        image: `${process.env.BASE_URL}/getImageFromFilmId/${movie?.id}`
+        image: `${process.env.BASE_URL}/movies/getImageFromFilmId/${movie?.id}`
     }
     return response
 }
