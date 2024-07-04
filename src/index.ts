@@ -3,10 +3,10 @@ import dotenv from "dotenv";
 import configViewEngine from "./config/viewEngine";
 import initRouter from "./routes/initRoute";
 import auth from './routes/auth'
-import { PrismaClient } from "@prisma/client";
+import movieRouter from "./routes/movies";
+import orderFood from "./routes/orderFood"
+import orderTicketRouter from "./routes/orderTicket";
 import bodyParser from "body-parser";
-
-const prismaClient:PrismaClient = new PrismaClient()
 
 dotenv.config();
 
@@ -21,6 +21,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', initRouter)
 
 app.use('/auth', auth)
+
+app.use('/movies', movieRouter)
+
+app.use('/foods', orderFood)
+
+app.use('/orderTicket', orderTicketRouter)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

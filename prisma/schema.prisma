@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -28,6 +29,7 @@ model Film {
   image Bytes
   mainActors String
   content String
+  director String
   currentShowing CurrentShowing?
   comingSoon ComingSoon?
   movieSchedules MovieSchedule[]
@@ -50,19 +52,21 @@ model ComingSoon {
 
 model MovieSchedule {
   id Int @id @default(autoincrement())
-  filmId Int @unique
-  time DateTime
+  filmId Int 
+  time String
+  hour Int
+  minute Int
   location Int
   film Film @relation(fields: [filmId] ,references: [id])
 
-  seatingOrderDetail SeatingOrderDetail?
+  seatingOrderDetail SeatingOrderDetail[]
 
   @@map("MovieSchedule")  
 }
 
 model Order {
   id Int @id @default(autoincrement())
-  customerId Int @unique
+  customerId Int 
   date DateTime
   totalPrice String
   customer User @relation(fields: [customerId] ,references: [id])
@@ -83,6 +87,7 @@ model Combo {
   id Int @id @default(autoincrement())
   price String
   name String
+  image Bytes
   foodCombos FoodCombo[]
   orderDetails OrderDetail[]
   @@map("Combo")
@@ -103,7 +108,6 @@ model OrderDetail {
   orderId Int
   foodId Int? 
   comboId  Int?
-  seatValue String?
 
   food Food? @relation(fields: [foodId], references: [id])
   combo Combo? @relation(fields: [comboId] ,references: [id])
@@ -115,7 +119,7 @@ model SeatingOrderDetail{
   id Int @id @default(autoincrement())
   orderDetailId Int @unique
   value String
-  movieScheduleId Int @unique
+  movieScheduleId Int 
 
   orderDetail OrderDetail @relation(fields: [orderDetailId], references: [id])
   movieSchedule MovieSchedule @relation(fields: [movieScheduleId], references: [id])
