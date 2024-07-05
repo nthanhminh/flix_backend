@@ -8,7 +8,12 @@ const createMovieSchedule = async(req: Request, res: Response) => {
 }
 
 const getMovieScheduleByFilmId = async(req: Request, res: Response) => {
-    const {filmId} = req.body
+    const filmId = parseInt(req.params.id);
+
+    if (isNaN(filmId)) {
+        res.status(400).send('Invalid filmId format');
+        return;
+    }
     const movieSchedules = await OrderTicketService.getMovieScheduleByFilmId(filmId)
     res.status(200).send(JSON.stringify(movieSchedules))
 }
@@ -29,7 +34,14 @@ const orderTicket = async(req: Request, res: Response) => {
 }
 
 const getOrderByCustomerId = async(req: Request, res: Response) => {
-    const {customerId} = req.body as {customerId : number}
+
+    const customerId = parseInt(req.params.id);
+
+    if (isNaN(customerId)) {
+        res.status(400).send('Invalid filmId format');
+        return;
+    }
+    // const {customerId} = req.body as {customerId : number}
 
     const response = await OrderService.getOrderByCustomerId(customerId)
 
@@ -37,7 +49,13 @@ const getOrderByCustomerId = async(req: Request, res: Response) => {
 }
 
 const getSeatingOrderDetailByMovieSchedule = async(req: Request, res: Response) => {
-    const {movieScheduleId} = req.body as {movieScheduleId : number}
+    const movieScheduleId = parseInt(req.params.id);
+
+    if (isNaN(movieScheduleId)) {
+        res.status(400).send('Invalid filmId format');
+        return;
+    }
+    // const {movieScheduleId} = req.body as {movieScheduleId : number}
 
     const response = await OrderService.getSeatingOrderDetailByMovieSchedule(movieScheduleId)
 

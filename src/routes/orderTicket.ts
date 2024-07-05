@@ -4,12 +4,12 @@ const orderTicketRouter: Router = express.Router();
 
 orderTicketRouter.post('/createMovieSchedule', OrderTicketController.createMovieSchedule)
 
-orderTicketRouter.get('/getMovieScheduleByFilmId', OrderTicketController.getMovieScheduleByFilmId)
+orderTicketRouter.get('/getMovieScheduleByFilmId/:id', OrderTicketController.getMovieScheduleByFilmId)
 
 orderTicketRouter.post('/orderTicket', OrderTicketController.orderTicket)
 
-orderTicketRouter.get('/getOrderByCustomerId', OrderTicketController.getOrderByCustomerId)
+orderTicketRouter.get('/getOrderByCustomerId/:id', OrderTicketController.getOrderByCustomerId)
 
-orderTicketRouter.get('/getSeatingOrderDetailByMovieSchedule', OrderTicketController.getSeatingOrderDetailByMovieSchedule)
+orderTicketRouter.get('/getSeatingOrderDetailByMovieSchedule/:id', OrderTicketController.getSeatingOrderDetailByMovieSchedule)
 
 export default orderTicketRouter;
