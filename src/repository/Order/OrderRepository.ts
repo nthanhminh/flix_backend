@@ -19,9 +19,9 @@ const addIntoOrder = async(customerId: number, totalPrice: string) => {
     }
 }
 
-const addIntoOrderDetail = async (orderId: number, foodId: number | null, comboId: number | null, quantity: number) => {
+const addIntoOrderDetail = async (orderId: number, foodId: number | null, comboId: number | null, quantity: number)  => {
     try {
-        const newOrderDetail = await prisma.orderDetail.create({
+        const newOrderDetail: OrderDetail = await prisma.orderDetail.create({
             data: {
                 orderId,
                 foodId,
