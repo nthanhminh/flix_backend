@@ -108,7 +108,7 @@ model OrderDetail {
   orderId Int
   foodId Int? 
   comboId  Int?
-
+  quantity Int
   food Food? @relation(fields: [foodId], references: [id])
   combo Combo? @relation(fields: [comboId] ,references: [id])
   seatingOrderDeatil SeatingOrderDetail?

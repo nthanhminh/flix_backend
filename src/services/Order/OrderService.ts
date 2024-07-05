@@ -1,3 +1,4 @@
+import { parse } from "path"
 import OrderRepository from "../../repository/Order/OrderRepository"
 
 type OrderDetailItem = {
@@ -9,21 +10,35 @@ type OrderForCustomer = {
     [key : number] : OrderDetailItem[]
 }
 
-const addFoodIntoOrderDetail = async(orderId: number,foodIdList: number[]) => {
-    foodIdList.forEach(async (foodId: number) => {
-        await OrderRepository.addIntoOrderDetail(orderId, foodId, null)
+type foodList = {
+    [key : number] : number,
+}
+
+const addFoodIntoOrderDetail = async(orderId: number,foodIdList: foodList) => {
+    // foodIdList.forEach(async (foodId: number) => {
+    //     await OrderRepository.addIntoOrderDetail(orderId, foodId, null)
+    // })
+
+    Object.keys(foodIdList).forEach(async (foodId: string) => {
+        const id = parseInt(foodId)
+        await OrderRepository.addIntoOrderDetail(orderId, id, null, foodIdList[id])
     })
 }
 
-const addComboIntoOrderDetail = async(orderId: number,comboIdList: number[]) => {
-    comboIdList.forEach(async (comboId: number) => {
-        await OrderRepository.addIntoOrderDetail(orderId, null, comboId)
+const addComboIntoOrderDetail = async(orderId: number,comboIdList: foodList) => {
+    // comboIdList.forEach(async (comboId: number) => {
+    //     await OrderRepository.addIntoOrderDetail(orderId, null, comboId)
+    // })
+
+    Object.keys(comboIdList).forEach(async (foodId: string) => {
+        const id = parseInt(foodId)
+        await OrderRepository.addIntoOrderDetail(orderId, null, id, comboIdList[id])
     })
 }
 
 const addSeatIntoSeatingOrderDetail = async(orderId: number, seatingOrderDetail: string[], movieScheduleId: number) => {
     seatingOrderDetail.forEach(async(value:string) => {
-        const newOrderDetail = await OrderRepository.addIntoOrderDetail(orderId, null, null)
+        const newOrderDetail = await OrderRepository.addIntoOrderDetail(orderId, null, null, 1)
         const orderDetailId = newOrderDetail!.id
         await OrderRepository.addIntoSeatingOrderDetail(orderDetailId, value, movieScheduleId)
     })

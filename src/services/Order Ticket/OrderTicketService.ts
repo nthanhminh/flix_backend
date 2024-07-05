@@ -1,4 +1,5 @@
 import OrderTicketRepository from "../../repository/Order Ticket/OrderTicketRepository";
+import { foodList } from "../../types/orderRequest";
 import OrderService from "../Order/OrderService";
 
 const createMovieSchedule = async(filmId:number, dateStr:string, hour:number, minute:number, location: number) => {
@@ -36,7 +37,7 @@ const getMovieScheduleByFilmId = async(filmId:number) => {
     return groupedSchedules;
 }
 
-const orderTicket = async (customerId: number, totalPrice: string, movieScheduleId: number, foodIdList: number[], comboIdList: number[], values: string[]) => {
+const orderTicket = async (customerId: number, totalPrice: string, movieScheduleId: number, foodIdList: foodList, comboIdList: foodList, values: string[]) => {
     const newOrder = await OrderService.addIntoOrder(customerId, totalPrice)
     const orderId = newOrder!.id
     const response = await Promise.all([

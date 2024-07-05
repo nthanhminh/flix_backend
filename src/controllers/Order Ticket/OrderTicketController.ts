@@ -1,6 +1,7 @@
 import OrderTicketService from "../../services/Order Ticket/OrderTicketService";
 import {Request, Response} from 'express'
 import OrderService from "../../services/Order/OrderService";
+import { foodList } from "../../types/orderRequest";
 const createMovieSchedule = async(req: Request, res: Response) => {
     const {filmId, dateStr, hour, minute, location} = req.body
     const response = await OrderTicketService.createMovieSchedule(filmId, dateStr, hour, minute, location)
@@ -23,8 +24,8 @@ const orderTicket = async(req: Request, res: Response) => {
         customerId: number, 
         totalPrice: string, 
         movieScheduleId: number, 
-        foodIdList: number[], 
-        comboIdList: number[], 
+        foodIdList: foodList, 
+        comboIdList: foodList, 
         values: string[]
     }
 

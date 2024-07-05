@@ -2,6 +2,7 @@ import FoodService from "../../services/Order Food/FoodService";
 import fs from 'fs'
 import path from "path";
 import { Request, Response } from "express";
+import { foodList } from "../../types/orderRequest";
 interface MulterRequest extends Request {
     files?: {
       [fieldname: string]: Express.Multer.File[];
@@ -109,8 +110,8 @@ const orderFood = async(req: Request, res: Response) => {
         const {customerId, totalPrice, foodIdList, comboIdList} = req.body as {
             customerId: number;
             totalPrice: string;
-            foodIdList: number[];
-            comboIdList: number[];
+            foodIdList: foodList;
+            comboIdList: foodList;
         }
         const response = await FoodService.orderFood(customerId, totalPrice, foodIdList, comboIdList)
         res.send(response)

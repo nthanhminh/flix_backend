@@ -2,6 +2,7 @@ import FoodRepository from "../../repository/Order Food/FoodRepository";
 import OrderRepository from "../../repository/Order/OrderRepository";
 import OrderService from "../Order/OrderService";
 import dotenv from 'dotenv'
+import {foodList} from '../../types/orderRequest'
 
 dotenv.config()
 
@@ -66,7 +67,7 @@ const getAllCombo = async() => {
     return result
 }
 
-const orderFood = async(customerId: number, totalPrice: string, foodIdList: number[], comboIdList: number[] ) => {
+const orderFood = async(customerId: number, totalPrice: string, foodIdList: foodList, comboIdList: foodList ) => {
    const newOrder = await OrderRepository.addIntoOrder(customerId, totalPrice)
    const orderId: number = newOrder!.id
    const response = await Promise.all([OrderService.addFoodIntoOrderDetail(orderId, foodIdList), OrderService.addComboIntoOrderDetail(orderId, comboIdList)])
