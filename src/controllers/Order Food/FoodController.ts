@@ -114,7 +114,7 @@ const orderFood = async(req: Request, res: Response) => {
             comboIdList: foodList;
         }
         const response = await FoodService.orderFood(customerId, totalPrice, foodIdList, comboIdList)
-        res.send(response)
+        res.send(JSON.stringify(response))
     } catch (error) {
         console.error(error)
         res.send("Internal server error")
