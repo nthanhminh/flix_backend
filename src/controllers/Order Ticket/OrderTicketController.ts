@@ -31,7 +31,7 @@ const orderTicket = async(req: Request, res: Response) => {
 
     const response = await OrderTicketService.orderTicket(customerId, totalPrice, movieScheduleId, foodIdList, comboIdList, values)
 
-    res.send(response)
+    res.send(JSON.stringify(response))
 }
 
 const getOrderByCustomerId = async(req: Request, res: Response) => {
