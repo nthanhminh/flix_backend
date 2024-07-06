@@ -8,7 +8,7 @@ const BASE_URL = process.env.BASE_URL
 const getTop10FilmCurrentShowing = async() => {
     try {
         const movies: (CurrentShowing & { film: Film })[]= await prisma.currentShowing.findMany({
-            take: 10,
+            take: 6,
             include: {
                 film: true
             }
@@ -31,7 +31,7 @@ const getTop10FilmCurrentShowing = async() => {
 const getTop10FilmComingSoon = async() => {
     try {
         const movies: (ComingSoon & { film: Film })[]= await prisma.comingSoon.findMany({
-            take: 10,
+            take: 6,
             include: {
                 film: true
             }

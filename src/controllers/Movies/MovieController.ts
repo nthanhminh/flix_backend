@@ -10,13 +10,13 @@ interface MulterRequest extends Request {
 
 const createNewMovie = async (req: Request, res: Response) => {
     const multerReq = req as MulterRequest;
-    const {name, mainActors, content, director} = multerReq.body
+    const {name, mainActors, content, director, tag, duration, country} = multerReq.body
     const fileName = multerReq.files?.['data'][0].filename
     const image = fs.readFileSync(path.join(__dirname, '../../uploads', fileName!));
     if(!image){
         res.status(400).send('Please upload a file')
     }
-    const response = await MovieService.createNewMovie(name, image, director, mainActors, content)
+    const response = await MovieService.createNewMovie(name, image, director, mainActors, content, tag, duration, country)
     if(response === 'Error occurred. Please try again later !'){
         res.status(500).send('Internal Server Error')
     } else {

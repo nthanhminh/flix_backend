@@ -30,9 +30,13 @@ model Film {
   mainActors String
   content String
   director String
+  tag      String  @default("Mentality")
+  duration String  @default("100m")
+  country  String  @default("VIETNAM")
   currentShowing CurrentShowing?
   comingSoon ComingSoon?
   movieSchedules MovieSchedule[]
+  
   ticketPrices TicketPrice[]
   @@map("Films")
 }

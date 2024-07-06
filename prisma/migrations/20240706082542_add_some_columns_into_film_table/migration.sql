@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Films" ADD COLUMN     "country" TEXT NOT NULL DEFAULT 'VIETNAM',
+ADD COLUMN     "duration" TEXT NOT NULL DEFAULT '100m',
+ADD COLUMN     "tag" TEXT NOT NULL DEFAULT 'Mentality';

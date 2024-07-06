@@ -8,6 +8,9 @@ const createNewMovie = async (
     director: string,
     mainActors: string,
     content: string,
+    tag: string,
+    duration: string,
+    country: string,
 ) : Promise<string> => {
     const newMovie: Film = await prisma.film.create({
         data: {
@@ -15,7 +18,10 @@ const createNewMovie = async (
             image,
             director,
             mainActors,
-            content
+            content,
+            tag,
+            duration,
+            country
         }
     })
 

@@ -5,9 +5,12 @@ const createNewMovie = async (
     image: Buffer,
     director: string,
     mainActors: string,
-    content: string
+    content: string,
+    tag: string,
+    duration: string,
+    country: string
 ) : Promise<string> => {
-    const response: string = await MovieRepository.createNewMovie(name,image, director, mainActors,content);
+    const response: string = await MovieRepository.createNewMovie(name,image, director, mainActors,content, tag, duration, country);
     return response;
 }
 
