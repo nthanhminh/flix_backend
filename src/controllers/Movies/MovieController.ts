@@ -2,7 +2,6 @@ import path from "path";
 import MovieService from "../../services/Movies/MovieService"
 import fs from 'fs'
 import { Request, Response } from "express"
-
 interface MulterRequest extends Request {
     files?: {
       [fieldname: string]: Express.Multer.File[];
@@ -65,6 +64,18 @@ const deleteMovieComingSoon = async (req: Request, res: Response) => {
     }
 }
 
+const createNewTicket = async(req: Request, res: Response) => {
+    const {name,type,price,filmId} = req.body as {
+        name: string,
+        type: string,
+        price: string,
+        filmId: number
+    }
+    const response = await MovieService.createNewTicket(name,type,price,filmId)
+
+    res.send(JSON.stringify(response))
+}
+
 const getImageFromFilmId = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
 
@@ -88,11 +99,22 @@ const getImageFromFilmId = async (req: Request, res: Response) => {
     }
 }
 
+const getTicketByFilmId = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    if(isNaN(id)) {
+        res.status(400).send("Invalid filmId")
+    }
+    const tickets = await MovieService.getTicketByFilmId(id)
+    res.send(JSON.stringify(tickets))
+}
+
 export default {
     createNewMovie,
     createNewCurrentMovieShowing,
     createNewMovieComingSoon,
     deleteMovieCurrentShowing,
     deleteMovieComingSoon,
-    getImageFromFilmId
+    getImageFromFilmId,
+    createNewTicket,
+    getTicketByFilmId
 }

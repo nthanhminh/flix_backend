@@ -1,4 +1,4 @@
-import { PrismaClient, Film, CurrentShowing, ComingSoon } from "@prisma/client";
+import { PrismaClient, Film, CurrentShowing, ComingSoon, TicketPrice } from "@prisma/client";
 
 const prisma: PrismaClient = new PrismaClient()
 
@@ -94,11 +94,34 @@ const getImageFromFilmId = async (id: number) : Promise<Buffer | null> => {
     return movie.image
 }
 
+const createNewTicket = async (name: string, type: string, price: string, filmId: number) =>{
+    const newTicket: TicketPrice = await prisma.ticketPrice.create({
+        data: {
+            name,
+            type,
+            price,
+            filmId
+        }
+    })
+
+    return newTicket
+}
+
+const getTicketByFilmId = async (filmId: number) => {
+    const tickets = await prisma.ticketPrice.findMany({where: {
+        filmId
+    }})
+
+    return tickets
+}
+
 export default {
     createNewMovie,
     createNewCurrentMovieShowing,
     createNewMovieComingSoon,
     deleteMovieCurrentShowing,
     deleteMovieComingSoon,
-    getImageFromFilmId
+    getImageFromFilmId,
+    createNewTicket,
+    getTicketByFilmId
 }

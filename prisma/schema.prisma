@@ -33,7 +33,18 @@ model Film {
   currentShowing CurrentShowing?
   comingSoon ComingSoon?
   movieSchedules MovieSchedule[]
+  ticketPrices TicketPrice[]
   @@map("Films")
+}
+
+model TicketPrice{
+  id Int @id @default(autoincrement())
+  name String
+  type String
+  price String
+  filmId Int 
+  film Film @relation(fields: [filmId], references: [id])
+  @@map("TicetkPrices")
 }
 
 model CurrentShowing{

@@ -36,11 +36,26 @@ const getImageFromFilmId = async (id : number): Promise<Buffer | null> => {
     return image;
 }
 
+const createNewTicket = async (name: string, type: string, price: string, filmId: number): Promise<string> => {
+    const response = await MovieRepository.createNewTicket(name, type, price, filmId)
+    if(response){
+        return "Successfully!"
+    }
+    return "Failed!"
+}
+
+const getTicketByFilmId = async (filmId: number) => {
+    const tickets = await MovieRepository.getTicketByFilmId(filmId)
+    return tickets
+}
+
 export default {
     createNewMovie,
     createNewCurrentMovieShowing,
     createNewMovieComingSoon,
     deleteMovieCurrentShowing,
     deleteMovieComingSoon,
-    getImageFromFilmId
+    getImageFromFilmId,
+    createNewTicket,
+    getTicketByFilmId
 }
