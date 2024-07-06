@@ -67,7 +67,6 @@ const getSeatingOrderDetailByOrderDetailId = async (orderDetailId: number) => {
 const getOrderByCustomerId = async (customerId: number) => {
     const response: OrderForCustomer = {}
     const orders = await getOrderFromUserId(customerId)
-    console.log(orders)
     for(const order of orders) {
         if(!response[order.id]){
             response[order.id] = []

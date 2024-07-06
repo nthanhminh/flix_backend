@@ -96,7 +96,6 @@ const getTop10FilmComingSoon = async() => {
 }
 
 const searchMovie = async(searchTerm: string) => {
-    console.log(searchTerm)
     try {
         const movies = await prisma.film.findMany({
             where: {

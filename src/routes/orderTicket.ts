@@ -1,6 +1,9 @@
 import express, {Router} from 'express';
 import OrderTicketController from '../controllers/Order Ticket/OrderTicketController';
+import isAuthenticated from '../middleware/auth';
 const orderTicketRouter: Router = express.Router();
+
+orderTicketRouter.use(isAuthenticated)
 
 orderTicketRouter.post('/createMovieSchedule', OrderTicketController.createMovieSchedule)
 

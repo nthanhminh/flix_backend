@@ -31,7 +31,27 @@ const checkUserNameIsExist = async (userName:string) : Promise<boolean | null> =
     return false;
 }
 
+const getUserByUserName = async (userName:string) : Promise<User | null> => {
+    const user = await prismaClient.user.findFirst({
+        where: {
+            userName,
+        }
+    })
+    return user
+}
+
+const getUserByUserNameAndId = async (userName:string, userId:number) : Promise<User | null> => {
+    const user = await prismaClient.user.findFirst({
+        where: {
+            id: userId,
+            userName,
+        }
+    })
+    return user
+}
 export default {
     createNewUser,
-    checkUserNameIsExist
+    checkUserNameIsExist,
+    getUserByUserName,
+    getUserByUserNameAndId
 }

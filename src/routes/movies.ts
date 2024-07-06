@@ -2,7 +2,10 @@ import express, { Router } from 'express'
 import upload from '../multer/multerStorage'
 import MovieController from '../controllers/Movies/MovieController'
 import GetMovieController from '../controllers/Movies/GetMovieController'
+import isAuthenticated from '../middleware/auth'
 const movieRouter: Router = express.Router()
+
+// movieRouter.use(isAuthenticated)
 
 movieRouter.post('/createNewMovie', upload.fields([{name: 'data', maxCount: 1}]), MovieController.createNewMovie)
 
@@ -28,8 +31,8 @@ movieRouter.post('/createNewTicket', MovieController.createNewTicket)
 
 movieRouter.get('/getTicketByFilmId/:id', MovieController.getTicketByFilmId)
 
-movieRouter.get('/getAllCurrentFilms', GetMovieController.getAllCurrentFilms)
+movieRouter.get('/getAllCurrentFilms',isAuthenticated, GetMovieController.getAllCurrentFilms)
 
-movieRouter.get('/getAllComingFilms', GetMovieController.getAllComingFilms)
+movieRouter.get('/getAllComingFilms', isAuthenticated, GetMovieController.getAllComingFilms)
 
 export default movieRouter

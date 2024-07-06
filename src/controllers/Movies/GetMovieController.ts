@@ -4,8 +4,8 @@ const getTop10FilmCurrentShowing = async(req: Request, res: Response) => {
     try {
         const movies = await GetMoviesService.getTop10FilmCurrentShowing()
         res.status(200).send(JSON.stringify(movies))
-    } catch (error) {
-        res.status(500).send(error)
+    } catch (error:any) {
+        return res.status(400).json({ error: error.message });
     }
 }
 
@@ -13,8 +13,8 @@ const getTop10FilmComingSoon = async(req: Request, res: Response) => {
     try {
         const movies = await GetMoviesService.getTop10FilmComingSoon()
         res.status(200).send(JSON.stringify(movies))
-    } catch (error) {
-        res.status(500).send(error)
+    } catch (error:any) {
+        return res.status(400).json({ error: error.message });
     }
 }
 
@@ -27,8 +27,8 @@ const searchMovie = async(req: Request, res: Response) => {
           }
         const movies = await GetMoviesService.searchMovie(search)
         res.status(200).send(movies)
-    } catch (error) {
-        res.status(500).send(error)
+    } catch (error:any) {
+        return res.status(400).json({ error: error.message });
     }
 }
 
@@ -46,8 +46,8 @@ const getAllComingFilms = async(req: Request, res: Response) => {
     try {
         const movies = await GetMoviesService.getAllComingFilms()
         res.status(200).send(JSON.stringify(movies))
-    } catch (error) {
-        res.status(500).send(error)
+    } catch (error:any) {
+        return res.status(400).json({ error: error.message });
     }
 }
 
@@ -55,8 +55,8 @@ const getAllCurrentFilms = async(req: Request, res: Response) => {
     try {
         const movies = await GetMoviesService.getAllCurrentFilms()
         res.status(200).send(JSON.stringify(movies))
-    } catch (error) {
-        res.status(500).send(error)
+    } catch (error:any) {
+        return res.status(400).json({ error: error.message });
     }
 }
 

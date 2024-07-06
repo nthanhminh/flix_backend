@@ -1,7 +1,10 @@
 import express, {Router} from 'express';
 import upload from '../multer/multerStorage';
 import FoodController from '../controllers/Order Food/FoodController';
+import isAuthenticated from '../middleware/auth';
 const orderFoodRouter: Router = express.Router();
+
+orderFoodRouter.use(isAuthenticated)
 
 orderFoodRouter.post('/addFood', upload.fields([{name: 'data', maxCount: 1}]), FoodController.addFood);
 

@@ -93,9 +93,8 @@ const getImageFromFilmId = async (req: Request, res: Response) => {
         } else {
             res.status(404).send('Film not found');
         }
-    } catch (error) {
-        console.error(`Error retrieving image for film ID ${id}:`, error);
-        res.status(500).send('Internal Server Error');
+    } catch (error:any) {
+        return res.status(400).json({ error: error.message });
     }
 }
 
