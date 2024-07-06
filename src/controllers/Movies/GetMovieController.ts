@@ -42,9 +42,30 @@ const getMovieById = async(req: Request, res: Response) => {
     res.status(200).send(movie)
 }
 
+const getAllComingFilms = async(req: Request, res: Response) => {
+    try {
+        const movies = await GetMoviesService.getAllComingFilms()
+        res.status(200).send(JSON.stringify(movies))
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+const getAllCurrentFilms = async(req: Request, res: Response) => {
+    try {
+        const movies = await GetMoviesService.getAllCurrentFilms()
+        res.status(200).send(JSON.stringify(movies))
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+
 export default {
     getTop10FilmCurrentShowing,
     getTop10FilmComingSoon,
     searchMovie,
-    getMovieById
+    getMovieById,
+    getAllComingFilms,
+    getAllCurrentFilms
 }

@@ -28,4 +28,8 @@ movieRouter.post('/createNewTicket', MovieController.createNewTicket)
 
 movieRouter.get('/getTicketByFilmId/:id', MovieController.getTicketByFilmId)
 
+movieRouter.get('/getAllCurrentFilms', GetMovieController.getAllCurrentFilms)
+
+movieRouter.get('/getAllComingFilms', GetMovieController.getAllComingFilms)
+
 export default movieRouter

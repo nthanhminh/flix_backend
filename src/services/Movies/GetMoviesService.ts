@@ -19,6 +19,25 @@ const getTop10FilmComingSoon = async () => {
     }
 }
 
+const getAllComingFilms = async () => {
+    try {
+        const movies = await GetMovieRepository.getAllComingFilms();
+        return movies
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const getAllCurrentFilms = async () => {
+    try {
+        const movies = await GetMovieRepository.getAllCurrentFilms();
+        return movies
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 const searchMovie = async (searchTerm: string) => {
     try {
         const search = searchTerm.trim().split(" ").join(" | ");
@@ -43,5 +62,7 @@ export default {
     getTop10FilmCurrentShowing,
     getTop10FilmComingSoon,
     searchMovie,
-    getMovieById
+    getMovieById,
+    getAllComingFilms,
+    getAllCurrentFilms
 }
