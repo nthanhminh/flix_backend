@@ -51,8 +51,14 @@ const orderTicket = async (customerId: number, totalPrice: string, movieSchedule
     return 'Error occured when creatin new order !'
 }
 
+const getMovieScheduleById = async (id:number) => {
+    const movieSchedule = await OrderTicketRepository.getMovieScheduleById(id)
+    return movieSchedule
+}
+
 export default {
     createMovieSchedule,
     getMovieScheduleByFilmId,
-    orderTicket
+    orderTicket,
+    getMovieScheduleById
 }

@@ -42,8 +42,20 @@ const getMovieScheduleByFilmId = async (filmId: number) => {
     return movieSchedules
 }
 
+const getMovieScheduleById = async (id: number) => {
+    const movieSchedules: MovieSchedule | null = await prisma.movieSchedule.findFirst({
+        where: {
+            id
+        },
+    })
+
+    return movieSchedules
+}
+
+
 export default {
     createMovieSchedule,
     getMovieScheduleByTime,
-    getMovieScheduleByFilmId
+    getMovieScheduleByFilmId,
+    getMovieScheduleById
 }
