@@ -5,7 +5,7 @@ import GetMovieController from '../controllers/Movies/GetMovieController'
 import isAuthenticated from '../middleware/auth'
 const movieRouter: Router = express.Router()
 
-// movieRouter.use(isAuthenticated)
+movieRouter.use(isAuthenticated)
 
 movieRouter.post('/createNewMovie', upload.fields([{name: 'data', maxCount: 1}]), MovieController.createNewMovie)
 
@@ -31,8 +31,8 @@ movieRouter.post('/createNewTicket', MovieController.createNewTicket)
 
 movieRouter.get('/getTicketByFilmId/:id', MovieController.getTicketByFilmId)
 
-movieRouter.get('/getAllCurrentFilms',isAuthenticated, GetMovieController.getAllCurrentFilms)
+movieRouter.get('/getAllCurrentFilms', GetMovieController.getAllCurrentFilms)
 
-movieRouter.get('/getAllComingFilms', isAuthenticated, GetMovieController.getAllComingFilms)
+movieRouter.get('/getAllComingFilms', GetMovieController.getAllComingFilms)
 
 export default movieRouter

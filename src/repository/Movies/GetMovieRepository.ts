@@ -17,7 +17,7 @@ const getTop10FilmCurrentShowing = async() => {
         const movieTranforms = movies.map((movie: (CurrentShowing & { film: Film })) => {
             return {
                 ...movie.film,
-                image: `${BASE_URL}/movies/getImageFromFilmId/${movie.film.id}`
+                image: `${BASE_URL}/images/getImageFromFilmId/${movie.film.id}`
             }
         })
 
@@ -39,7 +39,7 @@ const getAllCurrentFilms = async() => {
         const movieTranforms = movies.map((movie: (CurrentShowing & { film: Film })) => {
             return {
                 ...movie.film,
-                image: `${BASE_URL}/movies/getImageFromFilmId/${movie.film.id}`
+                image: `${BASE_URL}/images/getImageFromFilmId/${movie.film.id}`
             }
         })
 
@@ -61,7 +61,7 @@ const getAllComingFilms = async() => {
         const movieTranforms = movies.map((movie: (CurrentShowing & { film: Film })) => {
             return {
                 ...movie.film,
-                image: `${BASE_URL}/movies/getImageFromFilmId/${movie.film.id}`
+                image: `${BASE_URL}/images/getImageFromFilmId/${movie.film.id}`
             }
         })
 
@@ -84,7 +84,7 @@ const getTop10FilmComingSoon = async() => {
         const movieTranforms = movies.map((movie: (ComingSoon & { film: Film })) => {
             return {
                 ...movie.film,
-                image: `${BASE_URL}/movies/getImageFromFilmId/${movie.film.id}`
+                image: `${BASE_URL}/images/getImageFromFilmId/${movie.film.id}`
             }
         })
 
@@ -108,7 +108,7 @@ const searchMovie = async(searchTerm: string) => {
         const movieTranforms = movies.map((movie) => {
             return {
                 ...movie,
-                image: `${BASE_URL}/movies/getImageFromFilmId/${movie.id}`
+                image: `${BASE_URL}/images/getImageFromFilmId/${movie.id}`
             }
         })
     

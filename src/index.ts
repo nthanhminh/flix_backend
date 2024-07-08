@@ -6,6 +6,7 @@ import auth from './routes/auth'
 import movieRouter from "./routes/movies";
 import orderFood from "./routes/orderFood"
 import orderTicketRouter from "./routes/orderTicket";
+import getImage from './routes/getImage'
 import bodyParser from "body-parser";
 import cors from 'cors'
 
@@ -30,6 +31,8 @@ app.use('/movies', movieRouter)
 app.use('/foods', orderFood)
 
 app.use('/orderTicket', orderTicketRouter)
+
+app.use('/images', getImage)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

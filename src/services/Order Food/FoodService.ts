@@ -50,7 +50,7 @@ const getAllFood = async() => {
     const result = foods.map((food) => {
         return {
             ...food,
-            image: `${BASE_URL}/foods/getImageFromFoodId/${food.id}`
+            image: `${BASE_URL}/images/getImageFromFoodId/${food.id}`
         }
     })
     return result
@@ -61,7 +61,7 @@ const getAllCombo = async() => {
     const result = combos.map((combo) => {
         return {
             ...combo,
-            image: `${BASE_URL}/foods/getImageFromFoodId/${combo.id}`
+            image: `${BASE_URL}/images/getImageFromFoodId/${combo.id}`
         }
     })
     return result
