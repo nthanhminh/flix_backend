@@ -13,8 +13,8 @@ import cors from 'cors'
 dotenv.config();
 
 const corsOptions = {
-  origin: 'http://localhost:3000', 
-  credentials: true, 
+  origin: ['http://localhost:3000', 'https://flix-frontend-bice.vercel.app'],
+  credentials: true,
 };
 
 const app: Express = express();
