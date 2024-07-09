@@ -12,6 +12,11 @@ import cors from 'cors'
 
 dotenv.config();
 
+const corsOptions = {
+  origin: 'http://localhost:3000', 
+  credentials: true, 
+};
+
 const app: Express = express();
 
 const port = process.env.PORT || 3000;
@@ -20,7 +25,7 @@ configViewEngine(app)
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use('/', initRouter)
 
